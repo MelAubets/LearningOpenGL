@@ -1,0 +1,6 @@
+﻿  glad.c
+  MoreTriangles.cpp
+C:\Users\Mel\Desktop\Master\FX\PEC2\LearningOpenGL\04.MoreTriangles\MoreTriangles\MoreTriangles.cpp(66,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Mel\Desktop\Master\FX\PEC2\LearningOpenGL\04.MoreTriangles\MoreTriangles\MoreTriangles.cpp(67,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Mel\Desktop\Master\FX\PEC2\LearningOpenGL\04.MoreTriangles\MoreTriangles\MoreTriangles.cpp(68,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  MoreTriangles.vcxproj -> C:\Users\Mel\Desktop\Master\FX\PEC2\LearningOpenGL\04.MoreTriangles\MoreTriangles\x64\Debug\MoreTriangles.exe

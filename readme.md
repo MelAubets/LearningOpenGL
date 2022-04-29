@@ -8,4 +8,7 @@ En este repositorio se colgarán todos los programas y sus respectivos ejecutabl
 ## Cuadrado:
 ![Cuadrado](https://github.com/MelAubets/LearningOpenGL/blob/main/ImagesAndGifs/Square.jpg?raw=true)
 
+## Triangulo en movimiento:
+![Triangulo en movimiento](https://github.com/MelAubets/LearningOpenGL/blob/main/ImagesAndGifs/MovingTriangle.gif?raw=true)
+
 ##### Mel Aubets
