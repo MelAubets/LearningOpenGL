@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32413.511
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MoreTriangles", "MoreTriangles.vcxproj", "{8D487D21-2632-429F-9832-2C2FAC1CEE70}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8D487D21-2632-429F-9832-2C2FAC1CEE70}.Debug|x64.ActiveCfg = Debug|x64
+		{8D487D21-2632-429F-9832-2C2FAC1CEE70}.Debug|x64.Build.0 = Debug|x64
+		{8D487D21-2632-429F-9832-2C2FAC1CEE70}.Debug|x86.ActiveCfg = Debug|Win32
+		{8D487D21-2632-429F-9832-2C2FAC1CEE70}.Debug|x86.Build.0 = Debug|Win32
+		{8D487D21-2632-429F-9832-2C2FAC1CEE70}.Release|x64.ActiveCfg = Release|x64
+		{8D487D21-2632-429F-9832-2C2FAC1CEE70}.Release|x64.Build.0 = Release|x64
+		{8D487D21-2632-429F-9832-2C2FAC1CEE70}.Release|x86.ActiveCfg = Release|Win32
+		{8D487D21-2632-429F-9832-2C2FAC1CEE70}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {426E9F3A-C4B4-472D-9C5A-2AF553CB4614}
+	EndGlobalSection
+EndGlobal
