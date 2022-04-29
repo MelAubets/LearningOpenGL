@@ -1,5 +1,10 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <stb_image/stb_image.h>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include <shader/Shader.h>
 
@@ -36,9 +41,10 @@ int main() {
 	Shader ourShader("shader.vert", "shader.frag");
 
 	float vertices[] = {
+		//Position        //Color
 		 .05f, -.05f, .0f, 1.f, 0.101f, 0.666f,
 		-.05f, -.05f, .0f, 1.f, 0.101f, 0.666f,
-		 .0f,  .05f, .0f, .0f, .0f, .0f
+		 .00f,  .05f, .0f, 1.f, 0.101f, 0.666f
 	};
 
 	unsigned int VBO, VAO;
@@ -64,16 +70,22 @@ int main() {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		float timeValue = glfwGetTime()/2;
-		float xOffset = sin(timeValue)/1.2;
-		float yOffset = cos(timeValue*3.14) / 1.2;
-		float colOffset = (sin(timeValue)/2 + 0.5f);
+
 		ourShader.use();
-		ourShader.setFloat("colOffset", colOffset);
-		ourShader.setFloat("xOffset", xOffset);
-		ourShader.setFloat("yOffset", yOffset);
 
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		for (unsigned int i = 0; i <10;i++) {
+			glm::mat4 posTransform = glm::mat4(1.f);
+			posTransform = glm::translate(posTransform, glm::vec3((sin(timeValue) / 1.2)*i/10, (cos((timeValue * 3.14)) / 1.2)*i/10, .0f));
+			
+			glm::mat4 colTransform = glm::mat4(1.f);
+			colTransform = glm::translate(colTransform, glm::vec3((sin(timeValue) * i / 10), ((sin(timeValue) / 2 + 0.5f) * i / 10), ((sin(timeValue) / 2 + 0.5f) * i / 10)));
+			
+			ourShader.setMat4("posTransform", posTransform);
+			ourShader.setMat4("colTransform", colTransform);
+
+			glDrawArrays(GL_TRIANGLES, 0, 3);
+		}
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

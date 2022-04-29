@@ -145,6 +145,9 @@
     <ClCompile Include="..\..\..\..\GLAD\src\glad.c" />
     <ClCompile Include="MoreTriangles.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\..\..\..\..\OpenGL\include\shader\Shader.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
