@@ -48,10 +48,10 @@ int main() {
 
 	float vertices[] = {
 		//Position            //Color			  //Texture coordinates
-		 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-		 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
+		 0.2f,  0.2f, 0.0f,   0.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+		 0.2f, -0.2f, 0.0f,   0.0f, 0.0f, 0.0f,   1.0f, 0.0f, // bottom right
+		-0.2f, -0.2f, 0.0f,   0.0f, 0.0f, 0.0f,   0.0f, 0.0f, // bottom left
+		-0.2f,  0.2f, 0.0f,   0.0f, 0.0f, 0.0f,   0.0f, 1.0f  // top left 
 
 	};
 
@@ -87,7 +87,7 @@ int main() {
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -95,7 +95,7 @@ int main() {
 
 	int width, height, nrChannels;
 	stbi_set_flip_vertically_on_load(true);
-	unsigned char *data = stbi_load("batman.png",&width, &height, &nrChannels, 0);
+	unsigned char *data = stbi_load("dvd.png",&width, &height, &nrChannels, 0);
 	if (data) {
 		glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
@@ -110,12 +110,19 @@ int main() {
 		processInput(window);
 
 		//Rendering commands here
-		glClearColor(.176f, .035f, .227f, 1.f); //Color de fons
+		glClearColor(.0f, .0f, .0f, 1.f); //Color de fons
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glBindTexture(GL_TEXTURE_2D, texture);
 
+		float timeValue = glfwGetTime() / 4;
+		float xOffset = sin(2*timeValue) / 1.3;
+		float yOffset = cos(6*timeValue) / 1.2;
+
 		ourShader.use();
+		ourShader.setFloat("xOffset", xOffset);
+		ourShader.setFloat("yOffset", yOffset);
+
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
