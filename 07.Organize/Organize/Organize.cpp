@@ -27,8 +27,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput();
 
 GLFWwindow* window = NULL;
-unsigned int VAO, VBO, EBO, texture;
-Quad quad, light;
+Quad quad;
+Quad light;
 
 int createWindow() {
 
@@ -56,10 +56,9 @@ int createWindow() {
 }
 
 void initGL() {
-	glEnable(GL_DEPTH_TEST);
 	light.generateObj();
 	quad.generateObj();
-	light.loadTextureFromDisk("wood.png");
+	light.loadTextureFromDisk("fire.png");
 	quad.loadTextureFromDisk("wood.png");
 }
 
@@ -79,13 +78,18 @@ int main() {
 
 	initGL();
 
+
+	glEnable(GL_DEPTH_TEST);
+
 	light.setShader(&lightShader);
 	quad.setShader(&ourShader);
 
 	while (!glfwWindowShouldClose(window)) {
+
+		processInput();
+		
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		processInput();
 
 		render();
 

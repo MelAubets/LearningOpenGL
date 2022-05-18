@@ -23,9 +23,7 @@ public:
 
 		shaderForDraw = nullptr;
 	}
-	~Quad() {
-		vertices.clear();
-	}
+
 
 	void loadTextureFromDisk(std::string file) {
 		glGenTextures(1, &texture);

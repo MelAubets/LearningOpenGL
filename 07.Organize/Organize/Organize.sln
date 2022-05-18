@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32413.511
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Camera", "Camera.vcxproj", "{4B31EB72-58F0-43E2-8936-407E95F4BCD1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Organize", "Organize.vcxproj", "{4B31EB72-58F0-43E2-8936-407E95F4BCD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +26,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7D9443B5-4F2A-4AF3-BDFF-D772C7894782}
+		SolutionGuid = {03952712-0015-4B7C-8E51-17C2AE126BCF}
 	EndGlobalSection
 EndGlobal
