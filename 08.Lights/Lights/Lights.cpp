@@ -1,5 +1,6 @@
 #include "Plane.h"
 #include "Quad.h"
+#include "Light.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 
@@ -20,15 +21,14 @@ const unsigned int SCR_HEIGHT = 600;
 
 int createWindow();
 void initGL();
-//void createTexture();
 void render();
 int close();
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput();
 
 GLFWwindow* window = NULL;
-Quad quad;
-Quad light;
+Quad plane;
+Light light;
 
 int createWindow() {
 
@@ -57,19 +57,19 @@ int createWindow() {
 
 void initGL() {
 	light.generateObj();
-	quad.generateObj();
-	light.loadTextureFromDisk("fire.png", false);
-	quad.loadTextureFromDisk("wood.png", true);
+	plane.generateObj();
+	plane.loadTextureFromDisk("fire.png",true);
 }
 
 void render() {
 
 	float timeValue = glfwGetTime() / 2;
 	float xOffset = sin(timeValue) / 1.2;
-	float yOffset = cos(timeValue) / 1.2;
+	float zOffset = cos(timeValue) / 1.2;
+	glm::vec3 lightOffset(1.2f, 1.0f, 2.0f);
 
-	quad.render(SCR_WIDTH, SCR_HEIGHT, glm::vec3(xOffset,yOffset, .0f), 0.5f, 50.f*timeValue, glm::vec3(1.f, 0.f, 0.f));
-	light.render(SCR_WIDTH, SCR_HEIGHT, glm::vec3(0.f, 0.f, .0f), 0.5f, 50.f, glm::vec3(0.f, 1.f, 0.f));
+	light.render(SCR_WIDTH, SCR_HEIGHT, lightOffset, 0.1f, 0.f, glm::vec3(1.f, 0.f, 0.f));
+	plane.render(SCR_WIDTH, SCR_HEIGHT, glm::vec3(0.f), 1.f, -50.f, glm::vec3(1.f, 0.f, 0.f), glm::vec3(1.0f, 0.5f, 0.31f), lightOffset);
 	
 }
 
@@ -77,8 +77,8 @@ int main() {
 
 	createWindow();
 
-	Shader ourShader("Organize.vert", "Texture.frag");
-	Shader lightShader("Organize.vert", "Color.frag");
+	Shader ourShader("Vertex.vert", "Color.frag");
+	Shader lightShader("Light.vert", "Light.frag");
 
 	initGL();
 
@@ -86,7 +86,7 @@ int main() {
 	glEnable(GL_DEPTH_TEST);
 
 	light.setShader(&lightShader);
-	quad.setShader(&ourShader);
+	plane.setShader(&ourShader);
 
 	while (!glfwWindowShouldClose(window)) {
 
@@ -106,7 +106,7 @@ int main() {
 
 int close() {
 	light.clearGPU();
-	quad.clearGPU();
+	plane.clearGPU();
 
 	glfwTerminate();
 	return 0;
