@@ -58,8 +58,8 @@ int createWindow() {
 void initGL() {
 	light.generateObj();
 	quad.generateObj();
-	light.loadTextureFromDisk("fire.png");
-	quad.loadTextureFromDisk("wood.png");
+	light.loadTextureFromDisk("fire.png", false);
+	quad.loadTextureFromDisk("wood.png", true);
 }
 
 void render() {

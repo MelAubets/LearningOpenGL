@@ -25,7 +25,7 @@ public:
 	}
 
 
-	void loadTextureFromDisk(std::string file) {
+	void loadTextureFromDisk(std::string file, bool RGB) {
 		glGenTextures(1, &texture);
 		glBindTexture(GL_TEXTURE_2D, texture);
 
@@ -40,7 +40,10 @@ public:
 
 		unsigned char* data = stbi_load(file.c_str(), &width, &height, &nrChannels, 0);
 		if (data) {
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			if(RGB)
+				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			else
+				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
 		}
 		else {
@@ -111,8 +114,6 @@ public:
 	}
 
 	void render(const unsigned int SCR_WIDTH, const unsigned int SCR_HEIGHT, glm::vec3 offset, float size,float rotationAngle, glm::vec3 rotationAxis) {
-		glClearColor(.0f, .0f, .0f, 1.f); //Color de fons
-		glClear(GL_COLOR_BUFFER_BIT);
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture);
