@@ -85,23 +85,17 @@ public:
 		glEnableVertexAttribArray(1);
 	}
 
-	void render(const unsigned int SCR_WIDTH, const unsigned int SCR_HEIGHT, glm::vec3 offset, float size, float rotationAngle, glm::vec3 rotationAxis) {
-
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture);
+	void render(glm::vec3 position, glm::vec3 size, float zoom, float SCR_WIDTH, float SCR_HEIGHT, glm::mat4 view) {
 
 		//Perspective
 		glm::mat4 model = glm::mat4(1.0f);
-		glm::mat4 view = glm::mat4(1.f);
 		glm::mat4 projection = glm::mat4(1.f);
-		model = glm::rotate(model, glm::radians(rotationAngle), rotationAxis);
-		view = glm::translate(view, glm::vec3(0.f, 0.f, -3.f));
-		projection = glm::perspective(glm::radians(45.f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.f);
+		model = glm::translate(model, position);
+		model = glm::scale(model, size);
+		projection = glm::perspective(glm::radians(zoom), SCR_WIDTH / SCR_HEIGHT, 0.1f, 100.f);
 
 		//Set uniforms
 		(*shaderForDraw).use();
-		(*shaderForDraw).setFloat("size", size);
-		(*shaderForDraw).setVec3("offset", offset);
 		(*shaderForDraw).setMat4("model", model);
 		(*shaderForDraw).setMat4("view", view);
 		(*shaderForDraw).setMat4("projection", projection);
