@@ -1,9 +1,7 @@
 #include "Plane.h"
-#include "Quad.h"
 #include "Camera.h"
 #include "Mesh.h"
 #include "Model.h"
-#include "FrameBuffer.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 
@@ -42,7 +40,9 @@ bool firstMouse = true;
 float deltaTime = 0.f;
 float lastFrame = 0.f;
 
-Quad plane;
+int i = 1;
+
+Plane cube;
 
 int createWindow() {
 
@@ -75,53 +75,81 @@ void initGL(Shader shader) {
 
 	glEnable(GL_DEPTH_TEST);
 
-	plane.setShader(&shader);
+	cube.setShader(&shader);
 
-	plane.generateObj();
+	cube.generateObj();
 
-	plane.setTextures("fire.png", "fireNM.png");
+	cube.setTextures("flame5.png");
 
 	shader.use();
 	shader.setInt("cubeTexture", 0);
-	shader.setInt("dudvTexture", 1);
+	//shader.setInt("material.dudv", 1);
+
 }
 
 void render(Shader shader) {
+//
+//	int i = 1;
+//
+//	float timeValue = glfwGetTime();
+//
+//	if (timeValue < .1) i = 1;
+//	else if (timeValue < .2) i = 2;
+//	else if (timeValue < .3) i = 3;
+//	else if (timeValue < .4) i = 4;
+//	else if (timeValue < .5) i = 5;
+//	else if (timeValue < .6) i = 6;
+//	else if (timeValue < .7) i = 7;
+//	else if (timeValue < .8) i = 8;
+//	else if (timeValue < .9) i = 9;
+//	else if (timeValue < .10) i = 10;
+//	else if (timeValue < .11) i = 11;
+//	else if (timeValue < .12) i = 12;
+//	else if (timeValue < .13) i = 13;
+//	else if (timeValue < .14) i = 14;
+//	else if (timeValue < .15) i = 15;
+//	else if (timeValue < .16) { i = 16; }
+//	else { glfwSetTime(0.0); }
 
-	float timeValue = glfwGetTime() / 2;
-	float xOffset = sin(timeValue) / 1.2;
-	float zOffset = cos(timeValue) / 1.2;
-	glm::vec3 position(xOffset, 0.f, zOffset);
+//	std::string index = std::to_string(i);
+
+	//cube.setTextures("flame5.png");
 
 	shader.use();
+	glm::vec3 position(.0f, .0f, .0f);
 	glm::mat4 model = glm::mat4(1.0f);
 	glm::mat4 view = camera.GetViewMatrix();
 	glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+	shader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+	shader.setVec3("light.duvduv", 0.5f, 1.0f, 0.5f);
 	shader.setMat4("view", view);
 	shader.setMat4("projection", projection);
+	
 
-	plane.render(position, glm::vec3(1.f));
 
+	cube.render(position, glm::vec3(.5f));
 }
 
 int main() {
 
 	createWindow();
 
-	Shader shader("Vertex.vert", "Texture.frag");
+	Shader shader("vertex.vert", "texture.frag");
 
 	initGL(shader);
 
 	while (!glfwWindowShouldClose(window)) {
 
-		glEnable(GL_DEPTH_TEST);
 
-		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		float currentFrame = static_cast<float>(glfwGetTime());
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
+
+		glEnable(GL_DEPTH_TEST);
+
+		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		processInput();
 
@@ -135,7 +163,7 @@ int main() {
 }
 
 int close() {
-	plane.clearGPU();
+	cube.clearGPU();
 
 	glfwTerminate();
 	return 0;
@@ -184,4 +212,6 @@ void processInput() {
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera.ProcessKeyboard(RIGHT, deltaTime);
 }
+
+
 

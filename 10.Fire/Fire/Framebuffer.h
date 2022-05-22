@@ -11,13 +11,13 @@
 #include <vector>
 #include <shader/Shader.h>
 
-class FrameBuffer {
+class Framebuffer {
 public:
 
 	float SCR_WIDTH;
 	float SCR_HEIGHT;
 
-	FrameBuffer() {
+	Framebuffer() {
 		VAO = -1;
 		VBO = -1;
 		framebuffer = -1;

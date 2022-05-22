@@ -3,8 +3,12 @@ out vec4 FragColor;
 
 in vec2 texCoord;
 
-uniform sampler2D texture;
+uniform sampler2D cubeTexture;
+uniform sampler2D dudvTexture;
 
 void main(){
-	FragColor = texture(texture, texCoord);
+	vec4 ambient = texture(cubeTexture, texCoord);
+	vec4 dudv =  texture(dudvTexture, texCoord);
+
+	FragColor = ambient+dudv;
 }

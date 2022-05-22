@@ -24,7 +24,7 @@
     <ProjectGuid>{4b31eb72-58f0-43e2-8936-407e95f4bcd1}</ProjectGuid>
     <RootNamespace>Camera</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Mesh</ProjectName>
+    <ProjectName>Fire</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -148,11 +148,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="FrameBuffer.h" />
+    <ClInclude Include="Framebuffer.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="Plane.h" />
-    <ClInclude Include="Quad.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
